@@ -11,7 +11,7 @@ module.exports = {
   production: {
     rootPath: rootPath,
     db: 'mongodb://vicpulido:multivision@ds032340.mlab.com:32340/multivision',
-    port: process.env.PORT || 3090,
+    port: process.env.PORT || 80,
     signalingPort: process.env.SIGNALING_PORT || 8080
   }
 }
