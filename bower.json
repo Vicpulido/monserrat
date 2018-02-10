@@ -1,0 +1,31 @@
+{
+  "name": "multivisionfinal",
+  "description": "Awesome app",
+  "main": "server.js",
+  "authors": [
+    "VP"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "toastr": "^2.1.3",
+    "angular": "^1.6.8",
+    "angular-resource": "^1.6.8",
+    "angular-route": "^1.6.8",
+    "bootstrap": "^4.0.0",
+    "socket.io-client": "^2.0.4"
+  },
+  "resolutions": {
+    "jquery": "^3.3.1"
+  }
+}
