@@ -20,26 +20,30 @@ var fileServer = new(nodeStatic.Server)();
   fileServer.serve(req, res);
 }).listen(port);*/
 
-var options = {
-  key: fs.readFileSync('../config/vpkey.pem'),
-  cert: fs.readFileSync('../config/vpcert.pem'),
-  passphrase: 'ArrozConLeche1!'
-};
+if(env === 'production')
+{
+  // Create an HTTP service, as Heroku manages HTTPS automatically.
+  var app = http.createServer(function(req, res) {
+    fileServer.serve(req, res);
+  }).listen(port);
+}
+else
+{
+  var options = {
+    key: fs.readFileSync('../config/vpkey.pem'),
+    cert: fs.readFileSync('../config/vpcert.pem'),
+    passphrase: 'ArrozConLeche1!'
+  };
 
-// Create an HTTP service.
-/*var app = http.createServer(function(req, res) {
-  fileServer.serve(req, res);
-}).listen(port);*/
+  // Create an HTTPS service identical to the HTTP service.
+  /*var app = https.createServer(function(req, res) {
+    fileServer.serve(req, res);
+  }).listen(port);*/
 
-// Create an HTTPS service identical to the HTTP service.
-/*var app = https.createServer(function(req, res) {
-  fileServer.serve(req, res);
-}).listen(port);*/
-
-var app = https.createServer(options, function(req, res) {
-  fileServer.serve(req, res);
-}).listen(port);
-
+  var app = https.createServer(options, function(req, res) {
+    fileServer.serve(req, res);
+  }).listen(port);
+}
 
 var io = socketIO.listen(app);
 

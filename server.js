@@ -19,17 +19,22 @@ require('./server/config/passport')();
 
 require('./server/config/routes')(app);
 
-var options = {
-    key: fs.readFileSync('./server/config/vpkey.pem'),
-    cert: fs.readFileSync('./server/config/vpcert.pem'),
-    passphrase: 'ArrozConLeche1!'
-};
+if(env === 'production')
+{
+    // Create an HTTP service, as Heroku manages HTTPS automatically.
+    http.createServer(app).listen(config.port);
+}
+else
+{
+    var options = {
+        key: fs.readFileSync('./server/config/vpkey.pem'),
+        cert: fs.readFileSync('./server/config/vpcert.pem'),
+        passphrase: 'ArrozConLeche1!'
+    };
 
-// Create an HTTP service.
-//http.createServer(app).listen(config.port);
-
-// Create an HTTPS service identical to the HTTP service.
-https.createServer(options, app).listen(config.port);
+    // Create an HTTPS service identical to the HTTP service.
+    https.createServer(options, app).listen(config.port);
+}
 
 //app.listen(config.port);
 console.log('Listening on port ' + config.port + '...');
