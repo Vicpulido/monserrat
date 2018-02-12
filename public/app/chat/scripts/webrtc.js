@@ -1,6 +1,11 @@
 'use strict';
-//var body;
+
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+var config = require('../../../../server/config/config')[env];
+
 var address = window.location.protocol + '//' + window.location.hostname;
+
 
 var isChannelReady = false;
 var isInitiator = false;
@@ -50,7 +55,15 @@ var details = {
 //var client = io.connect(address, details);
 console.log('Signaling server address: ' + window.location.protocol + '//' + window.location.hostname + ':8080');
 //var socket = io.connect('https://localhost:8080',{ query: "ClientConnecting" });
-var client = io.connect(window.location.protocol + '//' + window.location.hostname + ':8080',{ query: "ClientConnecting" });
+
+if(env === 'production')
+{
+  var client = io.connect(config.signalingUrl,{ query: "ClientConnecting" });
+}
+else
+{
+  var client = io.connect(window.location.protocol + '//' + window.location.hostname + ':8080',{ query: "ClientConnecting" });
+}
 
 console.log('OK Computer');
 
