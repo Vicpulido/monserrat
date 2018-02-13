@@ -10,9 +10,9 @@ module.exports = {
   },
   production: {
     rootPath: rootPath,
-    //db: 'mongodb://vicpulido:multivision@ds032340.mlab.com:32340/multivision',
-    db: 'mongodb://localhost/multivision',
-    //port: process.env.PORT || 80,
-    port: process.env.PORT || 3030
+    db: 'mongodb://vicpulido:multivision@ds032340.mlab.com:32340/multivision',
+    //db: 'mongodb://localhost/multivision',
+    port: process.env.PORT || 80,
+    //port: process.env.PORT || 3030
   }
 }
