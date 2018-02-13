@@ -1,11 +1,19 @@
 'use strict';
 
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+console.log('Running webrtc.js...');
 
-var config = require('../../../../server/config/config')[env];
+var env = 'production';
+//var env = 'development';
+if(env == 'production')
+{
+  var signalingUrl = "https://frozen-ridge-63312.herokuapp.com";
+}
+else
+{
+  var signalingUrl = "https://localhost:8080";
+}
 
 var address = window.location.protocol + '//' + window.location.hostname;
-
 
 var isChannelReady = false;
 var isInitiator = false;
@@ -53,17 +61,10 @@ var details = {
 //console.log('Path:', address + '/dante/socket.io');
 
 //var client = io.connect(address, details);
-console.log('Signaling server address: ' + window.location.protocol + '//' + window.location.hostname + ':8080');
+console.log('Signaling server address: ' + signalingUrl);
 //var socket = io.connect('https://localhost:8080',{ query: "ClientConnecting" });
 
-if(env === 'production')
-{
-  var client = io.connect(config.signalingUrl,{ query: "ClientConnecting" });
-}
-else
-{
-  var client = io.connect(window.location.protocol + '//' + window.location.hostname + ':8080',{ query: "ClientConnecting" });
-}
+var client = io.connect(signalingUrl,{ query: "ClientConnecting" });
 
 console.log('OK Computer');
 

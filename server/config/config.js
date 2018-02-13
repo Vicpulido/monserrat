@@ -10,8 +10,9 @@ module.exports = {
   },
   production: {
     rootPath: rootPath,
-    db: 'mongodb://vicpulido:multivision@ds032340.mlab.com:32340/multivision',
-    port: process.env.PORT || 80,
-    signalingUrl: "https://frozen-ridge-63312.herokuapp.com"
+    //db: 'mongodb://vicpulido:multivision@ds032340.mlab.com:32340/multivision',
+    db: 'mongodb://localhost/multivision',
+    //port: process.env.PORT || 80,
+    port: process.env.PORT || 3030
   }
 }
